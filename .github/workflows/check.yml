@@ -1,0 +1,21 @@
+name: Check
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Cargo Check
+      run: cargo check --all
+    - name: Cargo Clippy
+      run: cargo clippy --all -- -D warnings
